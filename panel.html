@@ -9,6 +9,10 @@
       display: block; margin: 8px 0; padding: 6px 12px;
       font-size: 14px; cursor: pointer;
     }
+    h1 {
+      display: flex;
+      align-items: center;
+    }
     hr { margin: 16px 0; }
     #data-section { margin-top: 20px; }
     #data-view {
@@ -16,10 +20,20 @@
       font-family: monospace; border: 1px solid #ccc;
       max-height: 200px; overflow: auto;
     }
+    #version {
+      font-size: 14px
+    }
+    .author {
+      font-size: 14px;
+      font-style: italic;
+    }
+    .title {
+      margin-left: 5px;
+    }
   </style>
 </head>
 <body>
-  <h1>Universal Cleaner – by theHobbyist</h1>
+  <h1><img src="icons/icon-128.png" width="100" alt="Logo" /><span class="title">Universal Cleaner <span id="version">v</span> <span class="author">by theHobbyist</span></span></h1>
 
   <button id="clear-all">
     🗑️ Alles löschen (LocalStorage, SessionStorage, Cookies)

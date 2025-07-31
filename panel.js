@@ -76,6 +76,11 @@ document.addEventListener('DOMContentLoaded', () => {
       deleteCookies(); setTimeout(refreshDataView, 300);
     });
 
+  // Version aus dem Manifest auslesen und anzeigen
+  const manifest = chrome.runtime.getManifest();
+  const versionEl = document.getElementById('version');
+  versionEl.textContent = versionEl.textContent + manifest.version;
+
   // Erstmalige Befüllung
   refreshDataView();
 });
