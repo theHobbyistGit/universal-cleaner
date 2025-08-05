@@ -6,7 +6,7 @@
   <style>
     body { font-family: sans-serif; margin: 8px; padding: 8px; }
     button {
-      display: block; margin: 8px 0; padding: 6px 12px;
+      display: inline-block; margin: 8px; padding: 6px 12px;
       font-size: 14px; cursor: pointer;
     }
     h1 {
@@ -14,8 +14,8 @@
       align-items: center;
     }
     hr { margin: 16px 0; }
-    #data-section { margin-top: 20px; }
-    #data-view {
+    .data-section { margin-top: 20px; }
+    .data-view {
       background: #f5f5f5; padding: 8px; white-space: pre-wrap;
       font-family: monospace; border: 1px solid #ccc;
       max-height: 200px; overflow: auto;
@@ -36,20 +36,32 @@
   <h1><img src="icons/icon-128.png" width="100" alt="Logo" /><span class="title">Universal Cleaner <span id="version">v</span> <span class="author">by theHobbyist</span></span></h1>
 
   <button id="clear-all">
-    🗑️ Alles löschen (LocalStorage, SessionStorage, Cookies)
+    🗑️ Delete all (LocalStorage, SessionStorage, Cookies)
   </button>
 
   <hr />
 
-  <h2>Einzelne Daten löschen</h2>
-  <button id="clear-LocalStorage">🗑️ LocalStorage löschen</button>
-  <button id="clear-SessionStorage">🗑️ SessionStorage löschen</button>
-  <button id="clear-Cookies">🗑️ Cookies löschen</button>
+  <h2>Delete single data</h2>
+  <button id="clear-LocalStorage">🗑️ delete LocalStorage</button>
+  <button id="clear-SessionStorage">🗑️ delete SessionStorage</button>
+  <button id="clear-Cookies">🗑️ delete Cookies</button>
 
-  <section id="data-section">
-    <h2>Aktuelle Daten</h2>
-    <pre id="data-view">Lade Daten…</pre>
+  <section class="data-section">
+    <h2>Local Storage</h2>
+    <pre id="localStorage-view" class="data-view">Loading Local Storage1…</pre>
   </section>
+
+  <section class="data-section">
+    <h2>Session Storage</h2>
+    <pre id="sessionStorage-view" class="data-view">Loading Session Storage2…</pre>
+  </section>
+
+  <section class="data-section">
+    <h2>Cookies</h2>
+    <pre id="cookie-view" class="data-view">Loading Cookies3…</pre>
+  </section>
+
+  <button id="refresh-data-view">🔄 Refresh data</button>
 
   <script src="panel.js"></script>
 </body>

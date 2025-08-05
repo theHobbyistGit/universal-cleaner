@@ -29,10 +29,14 @@ function deleteCookies() {
   });
 }
 
-// 2) Ansicht aktualisieren
 function refreshDataView() {
-  const view = document.getElementById('data-view');
-  view.textContent = 'Lade Daten…';
+  const lsView     = document.getElementById('localStorage-view');
+  const ssView     = document.getElementById('sessionStorage-view');
+  const cookieView = document.getElementById('cookie-view');
+
+  lsView.textContent     = 'Loading LocalStorage…';
+  ssView.textContent     = 'Loading SessionStorage…';
+  cookieView.textContent = 'Loading Cookies…';
 
   chrome.devtools.inspectedWindow.eval(
     'JSON.stringify(Object.keys(localStorage))',
@@ -45,10 +49,9 @@ function refreshDataView() {
             cookieString => {
               const ls = JSON.parse(lsKeys || '[]');
               const ss = JSON.parse(ssKeys || '[]');
-              let out = `LocalStorage: ${ls.length? ls.join(', ') : '(leer)'}\n`;
-              out += `SessionStorage: ${ss.length? ss.join(', ') : '(leer)'}\n`;
-              out += `Cookies: ${cookieString || '(keine)'}\n`;
-              view.textContent = out;
+              lsView.textContent = `LocalStorage: ${ls.length? ls.join(', ') : '(empty)'}\n`;
+              ssView.textContent = `SessionStorage: ${ss.length? ss.join(', ') : '(empty)'}\n`;
+              cookieView.textContent = `Cookies: ${cookieString || '(none)'}\n`;
             }
           );
         }
@@ -57,7 +60,6 @@ function refreshDataView() {
   );
 }
 
-// 3) Klick-Handler binden & initial laden
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('clear-all').addEventListener('click', () => {
     deleteLocalStorage(); deleteSessionStorage(); deleteCookies();
@@ -75,12 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
     .addEventListener('click', () => {
       deleteCookies(); setTimeout(refreshDataView, 300);
     });
+  document.getElementById('refresh-data-view')
+    .addEventListener('click', () => {
+      refreshDataView();
+    });
 
   // Version aus dem Manifest auslesen und anzeigen
   const manifest = chrome.runtime.getManifest();
   const versionEl = document.getElementById('version');
   versionEl.textContent = versionEl.textContent + manifest.version;
 
-  // Erstmalige Befüllung
-  refreshDataView();
+  // Initiale Anzeige der Daten
+  refreshDataView();  
 });

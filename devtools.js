@@ -2,5 +2,13 @@
 chrome.devtools.panels.create(
   "Cleaner",
   "",
-  "panel.html"
+  "panel.html",
+  function(panel) {
+    panel.onHidden.addListener(() => {
+      chrome.runtime.sendMessage({ type: 'STOP_MY_INTERVAL' });
+    });
+    panel.onShown.addListener(() => {
+      chrome.runtime.sendMessage({ type: 'START_MY_INTERVAL' });
+    });
+  }
 );
